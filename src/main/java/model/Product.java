@@ -2,7 +2,7 @@ package model;
 
 import static java.util.UUID.randomUUID;
 
-abstract class Product {
+public abstract class Product {
     private int id;
     private double price;
     private String productName;
