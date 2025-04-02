@@ -2,7 +2,7 @@ package model;
 
 import static java.util.UUID.randomUUID;
 
-public abstract class Product {
+abstract class Product {
     private int id;
     private double price;
     private String productName;
@@ -50,6 +50,7 @@ public abstract class Product {
             throw new IllegalArgumentException("product Name cannot be null or empty");
         this.productName = productName;
     }
+
     public abstract String examine();
 
     public abstract String use();
