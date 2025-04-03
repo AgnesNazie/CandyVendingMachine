@@ -10,12 +10,7 @@ public abstract class Product {
     //constructor
 
     public Product(double price, String productName) {
-        if (price < 0) {
-            throw new IllegalArgumentException("Price cannot be negative");
-        }
-        if (productName == null || productName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Products name cannot be null or empty");
-        }
+
         this.id = randomUUID().hashCode();
         this.price = price;
         this.productName = productName;
@@ -31,13 +26,7 @@ public abstract class Product {
     public double getPrice() {
         return price;
     }
-    //setter for price
 
-    public void setPrice(double price) {
-        if (price < 0)
-            throw new IllegalArgumentException("price cannot be negative");
-        this.price = price;
-    }
     //getter for productName
 
     public String getProductName() {

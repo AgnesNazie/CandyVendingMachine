@@ -1,27 +1,34 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class VendingMachineImpl implements VendingMachine{
+public class VendingMachineImpl implements VendingMachine {
     private List<Product> products;
     private int depositPool;
+
+    //Allowed money (1, 2, 5, 10, etc)
+    private final List<Integer> validAmounts = Arrays.asList(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000);
 
     //constructor
     public VendingMachineImpl(List<Product> products) {
         this.products = products;
         this.depositPool = 0;
     }
-    //adds currency method
+    //adds currency add currency
 
     @Override
     public void addCurrency(int amount) {
-        depositPool += amount;
-        System.out.println("Added " + amount + " to balance.  Current balance: " + depositPool);
+        if (!validAmounts.contains(amount)) {
+            depositPool += amount;
+            throw new IllegalArgumentException("Added $" + amount + " to balance.  Current balance: $" + depositPool);
+        } else {
+            System.out.println("Invalid currency: $" + amount + " .Please use the valid Amount: " + validAmounts);
+        }
 
     }
-    //creates the current deposit method
-
+    //creates the current deposit balance
     @Override
     public int getBalance() {
         return depositPool;
@@ -30,20 +37,18 @@ public class VendingMachineImpl implements VendingMachine{
 
     @Override
     public Product request(int id) {
-        for (Product product : products)  {
+        for (Product product : products) {
             if (product.getId() == id) {
                 if (depositPool >= product.getPrice()) {
                     depositPool -= product.getPrice();
                     System.out.println("Dispensing: " + product.getProductName());
                     return product;
                 } else {
-                    System.out.println("Insufficient  amounts for: " + product.getProductName());
-                    return null;
+                    throw new IllegalArgumentException("Insufficient amounts. Price: $" + product.getPrice() + "Your balance : $" +  depositPool);
                 }
             }
         }
-        System.out.println("Product not found.");
-        return null;
+        throw new IllegalArgumentException("Product ID" + id + "not found.");
     }
     //end session implements
 
@@ -60,12 +65,12 @@ public class VendingMachineImpl implements VendingMachine{
     public String getDescription(int id) {
         for (Product product : products) {
             if (product.getId() == id) {
-                return product.toString();
+                return "Product:" +  product.getProductName() + "| Price: $" +  product.getPrice();
             }
         }
-        return "Product not found";
+        throw new IllegalArgumentException("Product ID " + id + "not found.");
     }
-    //implements that display list of all products
+    //methods display list of all products
 
     @Override
     public List<String> getProducts() {
