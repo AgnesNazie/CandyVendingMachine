@@ -3,15 +3,16 @@ package model;
 import static java.util.UUID.randomUUID;
 
 public abstract class Product {
+    private static int idCounter = 0;
     private int id;
     private double price;
     private String productName;
 
     //constructor
 
-    public Product(double price, String productName) {
+    public Product( double price, String productName) {
 
-        this.id = randomUUID().hashCode();
+        this.id = idCounter++;
         this.price = price;
         this.productName = productName;
     }

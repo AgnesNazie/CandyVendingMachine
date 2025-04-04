@@ -13,21 +13,22 @@ public class VendingMachineImpl implements VendingMachine {
 
     //constructor
     public VendingMachineImpl(List<Product> products) {
-        this.products = products;
+        this.products = (products != null) ? products : new ArrayList<>();
         this.depositPool = 0;
     }
     //adds currency add currency
 
     @Override
     public void addCurrency(int amount) {
-        if (!validAmounts.contains(amount)) {
+        if (validAmounts.contains(amount)) {
             depositPool += amount;
-            throw new IllegalArgumentException("Added $" + amount + " to balance.  Current balance: $" + depositPool);
+            System.out.println("✅ Money added! Current balance: $" + depositPool);
         } else {
             System.out.println("Invalid currency: $" + amount + " .Please use the valid Amount: " + validAmounts);
         }
 
     }
+
     //creates the current deposit balance
     @Override
     public int getBalance() {
@@ -44,7 +45,7 @@ public class VendingMachineImpl implements VendingMachine {
                     System.out.println("Dispensing: " + product.getProductName());
                     return product;
                 } else {
-                    throw new IllegalArgumentException("Insufficient amounts. Price: $" + product.getPrice() + "Your balance : $" +  depositPool);
+                    throw new IllegalArgumentException("Insufficient amounts. Price: $" + product.getPrice() + "Your balance : $" + depositPool);
                 }
             }
         }
@@ -65,7 +66,7 @@ public class VendingMachineImpl implements VendingMachine {
     public String getDescription(int id) {
         for (Product product : products) {
             if (product.getId() == id) {
-                return "Product:" +  product.getProductName() + "| Price: $" +  product.getPrice();
+                return "Product:" + product.getProductName() + "| Price: $" + product.getPrice();
             }
         }
         throw new IllegalArgumentException("Product ID " + id + "not found.");
@@ -76,7 +77,7 @@ public class VendingMachineImpl implements VendingMachine {
     public List<String> getProducts() {
         List<String> productList = new ArrayList<>();
         for (Product product : products) {
-            productList.add("[" + product.getId() + "]" + product.getProductName() + "cost $" + product.getPrice());
+            productList.add("[" + product.getId() + "] " + product.getProductName() + " | Cost: $" + product.getPrice());
         }
         return productList;
     }
