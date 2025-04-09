@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class VendingMachineImpl implements VendingMachine {
-    private List<Product> products;
+    private final List<Product> products;
     private int depositPool;
 
     //Allowed money (1, 2, 5, 10, etc)
@@ -41,7 +41,7 @@ public class VendingMachineImpl implements VendingMachine {
         for (Product product : products) {
             if (product.getId() == id) {
                 if (depositPool >= product.getPrice()) {
-                    depositPool -= product.getPrice();
+                    depositPool -= (int) product.getPrice();
                     System.out.println("Dispensing: " + product.getProductName());
                     return product;
                 } else {

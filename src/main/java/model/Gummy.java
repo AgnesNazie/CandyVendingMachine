@@ -1,7 +1,7 @@
 package model;
 
-public class Gummy extends Product {
-    private String flavour;
+ class Gummy extends Product {
+    private final String flavour;
      //constructor
 
     public Gummy(double price, String productName, String flavour) {
@@ -16,7 +16,7 @@ public class Gummy extends Product {
 
     @Override
     public String examine() {
-        return "Gummy:" + getProductName() + "Cost $ " + getPrice() + "Flavour" +  flavour + ".";
+        return "Gummy:" + super.getProductName() + "Cost $ " +super.getPrice() + "Flavour" +  flavour + ".";
     }
 
     @Override

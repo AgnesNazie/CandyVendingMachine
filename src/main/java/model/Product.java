@@ -1,11 +1,10 @@
 package model;
 
-import static java.util.UUID.randomUUID;
 
 public abstract class Product {
     private static int idCounter = 0;
-    private int id;
-    private double price;
+    private final int id;
+    private final double price;
     private String productName;
 
     //constructor

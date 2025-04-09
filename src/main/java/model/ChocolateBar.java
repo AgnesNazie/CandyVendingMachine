@@ -1,7 +1,7 @@
 package model;
 
 public class ChocolateBar extends Product {
-    private String chocolateType;
+    private final String chocolateType;
 
     public ChocolateBar(double price, String productName, String chocolateType) {
         super(price, productName);
@@ -15,11 +15,11 @@ public class ChocolateBar extends Product {
 
     @Override
     public String examine() {
-        return "Chocolate Bar: " + getProductName() + "Cost $" + getPrice() + "Type: " + chocolateType + ".";
+        return "Chocolate Bar: " + super.getProductName() + "Cost $" + super.getPrice() + "Type: " + chocolateType + ".";
     }
 
     @Override
     public String use() {
-        return "You enjoy the " + chocolateType.toLowerCase() + getProductName() + "Smooth and satisfying!";
+        return "You enjoy the " + chocolateType.toLowerCase() + super.getProductName() + "Smooth and satisfying!";
     }
 }
